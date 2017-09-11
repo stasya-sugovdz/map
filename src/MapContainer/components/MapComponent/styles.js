@@ -1,6 +1,4 @@
-import { StyleSheet, Dimensions } from 'react-native';
-
-const { width, height } = Dimensions.get("window");
+import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
     mapContainer: {
@@ -12,7 +10,7 @@ export default StyleSheet.create({
         borderRadius: 10 / 2,
         backgroundColor: '#fff',
         borderWidth: 3,
-        borderColor: '#800C0C'
+        borderColor: 'red'
     },
     markerWrap: {
         alignItems: "center",

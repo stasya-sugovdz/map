@@ -3,7 +3,6 @@ import {
     View, ScrollView, Text
 } from "react-native";
 
-import MapView from "react-native-maps";
 import styles from './styles';
 import MapComponent from './components/MapComponent/MapComponent';
 import SidebarContainer from "./components/SidebarContainer/SidebarContainer";

@@ -4,17 +4,18 @@ export default StyleSheet.create({
     inputContainer: {
         borderBottomColor: '#bbb',
         borderBottomWidth: 1,
-        paddingHorizontal: 10,
-        paddingVertical: 5
+        padding: 10
     },
     inputTitle: {
-        fontSize: 14
+        fontSize: 13,
+        paddingBottom: 10
     },
     inputSearch: {
         height: 40,
-        borderColor: 'gray',
+        borderColor: '#bbb',
         borderWidth: 1,
-        padding: 5
+        padding: 5,
+        fontSize: 17
     }
 });
 

@@ -3,8 +3,8 @@ import {
     View
 } from "react-native";
 
-import MapView from "react-native-maps";
-import styles from './styles'
+import styles from './styles';
+const MapView = require('react-native-maps');
 
 export default class MapComponent extends Component {
     constructor(props) {
