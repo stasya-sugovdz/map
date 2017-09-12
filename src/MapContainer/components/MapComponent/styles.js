@@ -16,5 +16,8 @@ export default StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
     },
-
+    activeMarker: {
+        width: 15,
+        height: 30
+    }
 });

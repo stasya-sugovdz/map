@@ -10,7 +10,44 @@ export default StyleSheet.create({
         height: height,
         width: width
     },
+
+    // sidebar styles:
     sidebar: {
         width: '25%'
+    },
+    itemsContainer: {
+
+    },
+    itemWrapper: {
+        padding: 5,
+        borderBottomColor: '#bbb',
+        borderBottomWidth: 1
+    },
+    itemTitle: {
+        fontSize: 14,
+        fontWeight: 'bold',
+        color: '#000'
+    },
+    itemDescription: {
+        fontSize: 12,
+        fontWeight: 'normal',
+        color: '#000'
+    },
+
+    //map styles:
+    mapContainer: {
+        flex: 1
+    },
+    circle: {
+        height: 10,
+        width: 10,
+        borderRadius: 10 / 2,
+        backgroundColor: '#fff',
+        borderWidth: 3,
+        borderColor: 'red'
+    },
+    markerWrap: {
+        alignItems: "center",
+        justifyContent: "center",
     }
 });

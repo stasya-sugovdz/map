@@ -1,49 +1,45 @@
-import React, { Component } from "react";
+import React from "react";
 import {
-    View
+    View,
+    Image
 } from "react-native";
-
 import styles from './styles';
+import activeMarker from '../../../assets/images/active-marker.png'
 const MapView = require('react-native-maps');
 
-export default class MapComponent extends Component {
-    constructor(props) {
-        super(props);
+export default function MapComponent (props) {
 
-        this.state = {
-            region: {
-                latitude: 45.52220671242907,
-                longitude: -122.6653281029795,
-                latitudeDelta: 0.04864195044303443,
-                longitudeDelta: 0.040142817690068,
-            }
-        }
-    }
-
-    renderMarkers = () => {
-        return (this.props.markers.map((marker, index) => {
+    const renderMarkers = ( markers, onPress, active ) => {
+        return (markers.map((marker, index) => {
                 return (
-                    <MapView.Marker key={index} coordinate={marker.coordinate} >
-                        <View style={styles.circle} />
+                    <MapView.Marker key={index}
+                                    coordinate={marker.coordinate}
+                                    onPress={onPress.bind(this, marker) }>
+                        { (active !== marker.id) && <View style={styles.circle} /> }
+                        { (active === marker.id) && <Image style={styles.activeMarker} source={require(activeMarker)} /> }
+
                     </MapView.Marker>
                 )
             })
         )
     };
 
+    return (
+        <MapView ref={map => this.map = map}
+                 style={styles.mapContainer}
+                 initialRegion={props.initialRegion}
+        >
+            { props.markers &&
+            renderMarkers(props.markers, props.onMarkerPress, props.activeMarker )
+            }
+        </MapView>
+    );
 
-    render() {
-        return (
-            <MapView ref={map => this.map = map}
-                     style={styles.mapContainer}
-                     initialRegion={this.state.region}
-            >
-                { this.renderMarkers() }
-            </MapView>
-        );
-    }
 }
 
 MapComponent.propTypes = {
-    markers: React.PropTypes.array
+    initialRegion: React.PropTypes.object.isRequired,
+    markers: React.PropTypes.array,
+    activeMarker: React.PropTypes.number,
+    onMarkerPress:  React.PropTypes.func
 };

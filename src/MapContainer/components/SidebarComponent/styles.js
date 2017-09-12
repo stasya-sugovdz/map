@@ -1,9 +1,4 @@
-import { StyleSheet, Dimensions } from 'react-native';
-
-const { width, height } = Dimensions.get("window");
-
-const CARD_HEIGHT = height / 4;
-const CARD_WIDTH = CARD_HEIGHT - 50;
+import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
 
@@ -12,8 +7,9 @@ export default StyleSheet.create({
     },
     itemWrapper: {
         padding: 5,
+        borderColor: '#fff',
         borderBottomColor: '#bbb',
-        borderBottomWidth: 1
+        borderWidth: 1
     },
     itemTitle: {
         fontSize: 14,
@@ -24,6 +20,13 @@ export default StyleSheet.create({
         fontSize: 12,
         fontWeight: 'normal',
         color: '#000'
+    },
+    activeItem: {
+        borderColor: 'blue',
+        borderBottomColor: 'blue'
+    },
+    activeTitle: {
+        color: 'blue'
     }
 });
 
