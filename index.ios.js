@@ -8,15 +8,17 @@ import React, { Component } from 'react';
 import {
   AppRegistry,
   StyleSheet,
-  Text,
+  Dimensions,
   View
 } from 'react-native';
-import MapContainer from './src/map/MapContainer'
+import MapContainer from './src/MapContainer/MapContainer'
 
 export default class map extends Component {
   render() {
     return (
-        <MapContainer/>
+        <View style={styles.container}>
+          <MapContainer/>
+        </View>
     );
   }
 }
@@ -26,18 +28,9 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
+      height: Dimensions.get("window").height,
+      width: Dimensions.get("window").width
+  }
 });
 
 AppRegistry.registerComponent('map', () => map);
