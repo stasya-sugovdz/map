@@ -4,7 +4,9 @@ import {
     Image
 } from "react-native";
 import styles from './styles';
-import activeMarker from '../../../assets/images/active-marker.png'
+
+const activeMarker = {img: require('../../../assets/images/active-marker.png')};
+
 const MapView = require('react-native-maps');
 
 export default function MapComponent (props) {
@@ -16,7 +18,10 @@ export default function MapComponent (props) {
                                     coordinate={marker.coordinate}
                                     onPress={onPress.bind(this, marker) }>
                         { (active !== marker.id) && <View style={styles.circle} /> }
-                        { (active === marker.id) && <Image style={styles.activeMarker} source={require(activeMarker)} /> }
+                        { (active === marker.id) && <Image resizeMode='contain'
+                                                           style={styles.activeMarker}
+                                                           source={ activeMarker.img } />
+                        }
 
                     </MapView.Marker>
                 )
@@ -40,6 +45,6 @@ export default function MapComponent (props) {
 MapComponent.propTypes = {
     initialRegion: React.PropTypes.object.isRequired,
     markers: React.PropTypes.array,
-    activeMarker: React.PropTypes.number,
+    activeMarker: React.PropTypes.any,
     onMarkerPress:  React.PropTypes.func
 };

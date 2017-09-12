@@ -41,6 +41,6 @@ export default function SidebarComponent(props) {
 
 SidebarComponent.propTypes = {
     items: React.PropTypes.array,
-    activeItem: React.PropTypes.number,
+    activeItem: React.PropTypes.any,
     onItemPress:  React.PropTypes.func
 };
