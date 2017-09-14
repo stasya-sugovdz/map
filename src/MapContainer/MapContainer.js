@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import {
-  View,
-  Dimensions
+  View, Dimensions, Text
 } from "react-native";
 
 import styles from './styles';
@@ -10,11 +9,7 @@ import MapComponent from './components/MapComponent/MapComponent';
 import SidebarComponent from './components/SidebarComponent/SidebarComponent';
 
 const { width, height } = Dimensions.get("window");
-
-const SCREEN_HEIGHT = height;
-const SCREEN_WIDTH = width;
 const ASPECT_RATIO = width / height;
-
 const LATTITUDE_DELTA = 0.0922;
 const LONGTITUDE_DELTA = LATTITUDE_DELTA * ASPECT_RATIO;
 
@@ -23,7 +18,7 @@ export default class MapContainer extends Component {
     super(props);
 
     this.state = {
-      initialRegion: null,
+      region: null,
       markers: [
         {
           coordinate: {
@@ -32,6 +27,7 @@ export default class MapContainer extends Component {
           },
           title: "Best Place",
           description: "This is the best place in Portland",
+
           id: 1
         },
         {
@@ -70,36 +66,52 @@ export default class MapContainer extends Component {
 
   componentDidMount() {
     this.getCurrentPosition();
-  }
+  };
+
+  componentWillUnmount() {
+    this.setState({ region: null })
+  };
 
   getCurrentPosition = () => {
     navigator.geolocation.getCurrentPosition( position => {
-      const lat = parseFloat(position.coords.latitude);
-      const long = parseFloat(position.coords.longitude);
 
-      const initialRegion = {
-        latitude: lat,
-        longitude: long,
-        latitudeDelta: LATTITUDE_DELTA,
-        longitudeDelta: LONGTITUDE_DELTA
-      };
-
-      this.setState({ initialRegion: initialRegion })
-    }, (error) => console.log(error))
+      //TODO: use lat and long variables for initialRegion latitude and longtitude to get current Geolocation
+        const lat = parseFloat(position.coords.latitude); //45.52220671242907
+        const long = parseFloat(position.coords.longitude); //-122.6653281029795
+        const initialRegion = {
+          latitude: 45.52220671242907,
+          longitude: -122.6653281029795,
+          latitudeDelta: LATTITUDE_DELTA,
+          longitudeDelta: LONGTITUDE_DELTA
+        };
+        this.setState({ region: initialRegion })
+      },
+      (error) => { console.log(error) },
+      { enableHighAccuracy: true, timeout: 50000, maximumAge: 1000})
   };
 
-  onMarkerPress = (marker, e) => {
+  onMarkerPress = (marker) => {
     this.setState({ activeMarker: marker.id });
   };
 
-  onItemPress = (item, e) => {
-    this.setState({ activeMarker: item.id });
+  onItemPress = (item) => {
+    let newPosition = {
+      latitude: item.coordinate.latitude,
+      longitude: item.coordinate.longitude,
+      latitudeDelta: LATTITUDE_DELTA,
+      longitudeDelta: LONGTITUDE_DELTA
+    };
+
+    this.setState({
+      activeMarker: item.id,
+      region: newPosition
+    });
   };
 
 
   render() {
     return (
-      <View style={styles.mapHolder}>
+      <View style={styles.container}>
 
         <View style={styles.sidebar}>
           <SearchComponent onChange={ (text) => { console.log(text) }} />
@@ -108,10 +120,16 @@ export default class MapContainer extends Component {
                             activeItem={ +this.state.activeMarker } />
         </View>
 
-        <MapComponent initialRegion={this.state.initialRegion}
-                      markers={this.state.markers}
-                      onMarkerPress={ this.onMarkerPress }
-                      activeMarker={ +this.state.activeMarker } />
+        <View style={styles.mainContainer}>
+          { !this.state.region && <Text>Loading...</Text> }
+
+          { this.state.region &&
+            <MapComponent initialRegion={this.state.region}
+                          markers={this.state.markers}
+                          onMarkerPress={ this.onMarkerPress }
+                          activeMarker={ +this.state.activeMarker } />
+          }
+        </View>
       </View>
     );
   }

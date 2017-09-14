@@ -32,7 +32,9 @@ export default function MapComponent (props) {
     return (
         <MapView ref={map => this.map = map}
                  style={styles.mapContainer}
-                 initialRegion={props.initialRegion}
+                 region={props.initialRegion}
+                 showsScale={true}
+                 loadingEnabled={true}
         >
             { props.markers &&
             renderMarkers(props.markers, props.onMarkerPress, props.activeMarker )

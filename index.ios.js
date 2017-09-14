@@ -8,7 +8,6 @@ import React, { Component } from 'react';
 import {
   AppRegistry,
   StyleSheet,
-  Dimensions,
   View
 } from 'react-native';
 import MapContainer from './src/MapContainer/MapContainer'
