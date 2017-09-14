@@ -37,7 +37,7 @@ export default function MapComponent (props) {
                  loadingEnabled={true}
         >
             { props.markers &&
-            renderMarkers(props.markers, props.onMarkerPress, props.activeMarker )
+                renderMarkers(props.markers, props.onMarkerPress, props.activeMarker )
             }
         </MapView>
     );

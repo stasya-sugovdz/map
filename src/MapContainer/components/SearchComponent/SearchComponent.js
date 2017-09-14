@@ -1,38 +1,35 @@
-import React, { Component } from "react";
-// import PropTypes from 'prop-types';
+import React from "react";
 import {
-    View,
-    Text,
-    TextInput
+  View,
+  Text,
+  TextInput
 } from "react-native";
 
 import styles from './styles'
 
-export default class SearchComponent extends Component {
-    constructor(props) {
-        super(props);
+export default function SearchComponent(props) {
 
-        this.state = {
-            placeholder: 'search...',
-            text: ''
-        }
-    }
+  return (
+    <View style={styles.inputContainer}>
+        <Text style={styles.inputTitle}>{'enter zip code'.toUpperCase()}</Text>
+        <TextInput
+          multiline={false}
+          maxLength={10}
+          style={styles.inputSearch}
+          onChangeText={ val => props.onChange(val) }
+        />
+    </View>
+  );
 
-    render() {
-        return (
-            <View style={styles.inputContainer}>
-                <Text style={styles.inputTitle}>{'enter zip code'.toUpperCase()}</Text>
-                <TextInput
-                    style={styles.inputSearch}
-                    onChangeText={(text) => this.props.onChange({text})}
-                    placeholder={this.state.placeholder}
-                />
-            </View>
-        );
-    }
 }
 
 
 SearchComponent.propTypes = {
-    onChange: React.PropTypes.func
+  onChange: React.PropTypes.func
 };
+
+// const inputValidate = if(isNaN(+props.filter)){
+//   return console.log('Please, enter numbers!!!')
+// } else if( props.filter.split().length ){
+//
+// };

@@ -10,7 +10,7 @@ import SidebarComponent from './components/SidebarComponent/SidebarComponent';
 
 const { width, height } = Dimensions.get("window");
 const ASPECT_RATIO = width / height;
-const LATTITUDE_DELTA = 0.0922;
+const LATTITUDE_DELTA = 0.0461; //0.0922
 const LONGTITUDE_DELTA = LATTITUDE_DELTA * ASPECT_RATIO;
 
 export default class MapContainer extends Component {
@@ -27,7 +27,8 @@ export default class MapContainer extends Component {
           },
           title: "Best Place",
           description: "This is the best place in Portland",
-
+          zip: 132,
+          postCode: 6854651,
           id: 1
         },
         {
@@ -37,6 +38,8 @@ export default class MapContainer extends Component {
           },
           title: "Second Best Place",
           description: "This is the second best place in Portland",
+          zip: '123',
+          postCode: '6544',
           id: 2
         },
         {
@@ -46,6 +49,8 @@ export default class MapContainer extends Component {
           },
           title: "Third Best Place",
           description: "This is the third best place in Portland",
+          zip: '456',
+          postCode: '78507',
           id: 3
         },
         {
@@ -55,11 +60,12 @@ export default class MapContainer extends Component {
           },
           title: "Fourth Best Place",
           description: "This is the fourth best place in Portland",
+          zip: '132',
+          postCode: '6854651',
           id: 4
         },
       ],
-      placeholder: 'search...',
-      text: '',
+      inputValue: null,
       activeMarker: null
     };
   }
@@ -108,16 +114,20 @@ export default class MapContainer extends Component {
     });
   };
 
+  onChange = (val) => {
+    this.setState({ inputValue: val })
+  };
 
   render() {
     return (
       <View style={styles.container}>
 
         <View style={styles.sidebar}>
-          <SearchComponent onChange={ (text) => { console.log(text) }} />
+          <SearchComponent onChange={ this.onChange} />
           <SidebarComponent items={ this.state.markers }
                             onItemPress={ this.onItemPress }
-                            activeItem={ +this.state.activeMarker } />
+                            activeItem={ +this.state.activeMarker }
+                            filter={ this.state.inputValue } />
         </View>
 
         <View style={styles.mainContainer}>
