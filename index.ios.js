@@ -8,7 +8,6 @@ import React, { Component } from 'react';
 import {
   AppRegistry,
   StyleSheet,
-  Dimensions,
   View
 } from 'react-native';
 import MapContainer from './src/MapContainer/MapContainer'
@@ -27,9 +26,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
-      height: Dimensions.get("window").height,
-      width: Dimensions.get("window").width
+    alignItems: 'center'
   }
 });
 

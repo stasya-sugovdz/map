@@ -1,38 +1,40 @@
-import React, { Component } from "react";
-// import PropTypes from 'prop-types';
+import React from "react";
 import {
-    View,
-    Text,
-    TextInput
+  View,
+  Text,
+  TextInput
 } from "react-native";
 
 import styles from './styles'
 
-export default class SearchComponent extends Component {
-    constructor(props) {
-        super(props);
+export default function SearchComponent(props) {
 
-        this.state = {
-            placeholder: 'search...',
-            text: ''
-        }
-    }
+  const{ onChange, showError } = props;
+  return (
+    <View style={styles.inputContainer}>
+        <Text style={styles.inputTitle}>{'enter zip code'.toUpperCase()}</Text>
+        <TextInput
+          multiline={false}
+          maxLength={10}
+          keyBoardType='numeric'
+          style={styles.inputSearch}
+          onChangeText={ val => onChange(val) }
+        />
+      { showError === 'isNaN' && <Text style={styles.errorText}>Please enter numbers...</Text>}
+      { showError === 'aboveLimit' && <Text style={styles.errorText}>You could enter maximum 10 numbers...</Text>}
+    </View>
+  );
 
-    render() {
-        return (
-            <View style={styles.inputContainer}>
-                <Text style={styles.inputTitle}>{'enter zip code'.toUpperCase()}</Text>
-                <TextInput
-                    style={styles.inputSearch}
-                    onChangeText={(text) => this.props.onChange({text})}
-                    placeholder={this.state.placeholder}
-                />
-            </View>
-        );
-    }
 }
 
 
 SearchComponent.propTypes = {
-    onChange: React.PropTypes.func
+  onChange: React.PropTypes.func,
+  showError: React.PropTypes.string
 };
+
+// const inputValidate = if(isNaN(+props.filter)){
+//   return console.log('Please, enter numbers!!!')
+// } else if( props.filter.split().length ){
+//
+// };
