@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import {
-  View, Dimensions, Text, ActivityIndicator
+  View, Dimensions, ActivityIndicator
 } from "react-native";
 
 import styles from './styles';
@@ -18,64 +18,21 @@ export default class MapContainer extends Component {
     super(props);
 
     this.state = {
+      markers: [],
       region: null,
-      markers: [
-        {
-          coordinate: {
-            latitude: 45.524548,
-            longitude: -122.6749817,
-          },
-          title: "Best Place",
-          description: "This is the best place in Portland",
-          zip: 132,
-          postCode: 6854651,
-          id: 1
-        },
-        {
-          coordinate: {
-            latitude: 45.524698,
-            longitude: -122.6655507,
-          },
-          title: "Second Best Place",
-          description: "This is the second best place in Portland",
-          zip: '123',
-          postCode: '6544',
-          id: 2
-        },
-        {
-          coordinate: {
-            latitude: 45.5230786,
-            longitude: -122.6701034,
-          },
-          title: "Third Best Place",
-          description: "This is the third best place in Portland",
-          zip: '456',
-          postCode: '78507',
-          id: 3
-        },
-        {
-          coordinate: {
-            latitude: 45.521016,
-            longitude: -122.6561917,
-          },
-          title: "Fourth Best Place",
-          description: "This is the fourth best place in Portland",
-          zip: '132',
-          postCode: '6854651',
-          id: 4
-        },
-      ],
       inputValue: null,
-      activeMarker: null
+      activeMarker: null,
+      inputError: ''
     };
   }
 
   componentDidMount() {
     this.getCurrentPosition();
+    this.setState({ markers: this.getMarkers() });
   };
 
   componentWillUnmount() {
-    this.setState({ region: null })
+    this.setState({ region: null, markers: [] })
   };
 
   getCurrentPosition = () => {
@@ -94,6 +51,55 @@ export default class MapContainer extends Component {
       },
       (error) => { console.log(error) },
       { enableHighAccuracy: true, timeout: 50000, maximumAge: 1000})
+  };
+
+  getMarkers = () => {
+    return [
+      {
+        coordinate: {
+          latitude: 45.524548,
+          longitude: -122.6749817,
+        },
+        title: "Best Place",
+        description: "This is the best place in Portland",
+        zip: 132,
+        postCode: 6854651,
+        id: 1
+      },
+      {
+        coordinate: {
+          latitude: 45.524698,
+          longitude: -122.6655507,
+        },
+        title: "Second Best Place",
+        description: "This is the second best place in Portland",
+        zip: '123',
+        postCode: '6544',
+        id: 2
+      },
+      {
+        coordinate: {
+          latitude: 45.5230786,
+          longitude: -122.6701034,
+        },
+        title: "Third Best Place",
+        description: "This is the third best place in Portland",
+        zip: '456',
+        postCode: '78507',
+        id: 3
+      },
+      {
+        coordinate: {
+          latitude: 45.521016,
+          longitude: -122.6561917,
+        },
+        title: "Fourth Best Place",
+        description: "This is the fourth best place in Portland",
+        zip: '132',
+        postCode: '6854651',
+        id: 4
+      },
+    ]
   };
 
   onMarkerPress = (marker) => {
@@ -115,7 +121,15 @@ export default class MapContainer extends Component {
   };
 
   onChange = (val) => {
-    this.setState({ inputValue: val })
+    const numbers = /\D/i;
+
+    if( numbers.test(val)) {
+      this.setState({ inputError: 'isNaN' });
+    } else if( numbers.length > 10) {
+      this.setState({ inputError: 'aboveLimit' });
+    } else {
+      this.setState({ inputValue: val, inputError: '' });
+    }
   };
 
   render() {
@@ -123,7 +137,7 @@ export default class MapContainer extends Component {
       <View style={styles.container}>
 
         <View style={styles.sidebar}>
-          <SearchComponent onChange={ this.onChange } />
+          <SearchComponent onChange={ this.onChange } showError={this.state.inputError} />
           <SidebarComponent items={ this.state.markers }
                             onItemPress={ this.onItemPress }
                             activeItem={ +this.state.activeMarker }

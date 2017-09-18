@@ -16,6 +16,8 @@ export default StyleSheet.create({
     width: '25%'
   },
   mainContainer: {
-    width: '75%'
+    width: '75%',
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 });
