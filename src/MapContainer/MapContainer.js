@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import {
-  View, Dimensions, Text
+  View, Dimensions, Text, ActivityIndicator
 } from "react-native";
 
 import styles from './styles';
@@ -123,7 +123,7 @@ export default class MapContainer extends Component {
       <View style={styles.container}>
 
         <View style={styles.sidebar}>
-          <SearchComponent onChange={ this.onChange} />
+          <SearchComponent onChange={ this.onChange } />
           <SidebarComponent items={ this.state.markers }
                             onItemPress={ this.onItemPress }
                             activeItem={ +this.state.activeMarker }
@@ -131,7 +131,7 @@ export default class MapContainer extends Component {
         </View>
 
         <View style={styles.mainContainer}>
-          { !this.state.region && <Text>Loading...</Text> }
+          { !this.state.region && <ActivityIndicator size='small' /> }
 
           { this.state.region &&
             <MapComponent initialRegion={this.state.region}
