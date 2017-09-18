@@ -37,19 +37,25 @@ export default class MapContainer extends Component {
 
   getCurrentPosition = () => {
     navigator.geolocation.getCurrentPosition( position => {
-
-      //TODO: use lat and long variables for initialRegion latitude and longtitude to get current Geolocation
-        const lat = parseFloat(position.coords.latitude); //45.52220671242907
-        const long = parseFloat(position.coords.longitude); //-122.6653281029795
+        const lat = parseFloat(position.coords.latitude);
+        const long = parseFloat(position.coords.longitude);
+        const userRegion = {
+          latitude: lat,
+          longitude: long,
+          latitudeDelta: LATTITUDE_DELTA,
+          longitudeDelta: LONGTITUDE_DELTA
+        };
+        this.setState({ region: userRegion })
+      },
+      (error) => {
         const initialRegion = {
-          latitude: 45.52220671242907,
-          longitude: -122.6653281029795,
+          latitude: -33.865123,
+          longitude: 151.2099,
           latitudeDelta: LATTITUDE_DELTA,
           longitudeDelta: LONGTITUDE_DELTA
         };
         this.setState({ region: initialRegion })
       },
-      (error) => { console.log(error) },
       { enableHighAccuracy: true, timeout: 50000, maximumAge: 1000})
   };
 
@@ -57,8 +63,8 @@ export default class MapContainer extends Component {
     return [
       {
         coordinate: {
-          latitude: 45.524548,
-          longitude: -122.6749817,
+          latitude: -33.865143,
+          longitude: 151.2099817,
         },
         title: "Best Place",
         description: "This is the best place in Portland",
@@ -68,8 +74,8 @@ export default class MapContainer extends Component {
       },
       {
         coordinate: {
-          latitude: 45.524698,
-          longitude: -122.6655507,
+          latitude: -33.865155,
+          longitude: 151.2155507,
         },
         title: "Second Best Place",
         description: "This is the second best place in Portland",
@@ -79,8 +85,8 @@ export default class MapContainer extends Component {
       },
       {
         coordinate: {
-          latitude: 45.5230786,
-          longitude: -122.6701034,
+          latitude: -33.865143,
+          longitude: 151.2125336,
         },
         title: "Third Best Place",
         description: "This is the third best place in Portland",
@@ -90,8 +96,8 @@ export default class MapContainer extends Component {
       },
       {
         coordinate: {
-          latitude: 45.521016,
-          longitude: -122.6561917,
+          latitude: -33.865431,
+          longitude: 151.19998803,
         },
         title: "Fourth Best Place",
         description: "This is the fourth best place in Portland",

@@ -4,20 +4,19 @@ import { StyleSheet, Dimensions } from 'react-native';
 const width = Dimensions.get('window').width;
 const FONT_LG = width * 0.03;
 const FONT_MD = width * 0.02;
-const FONT_S = width * 0.01;
+const FONT_S = width * 0.015;
 
 export default StyleSheet.create({
   inputContainer: {
     borderBottomColor: '#bbb',
     borderBottomWidth: 1,
-    //padding: 10
     padding: 5,
-    minHeight: 70
+    minHeight: 65
   },
   inputTitle: {
     //fontSize: 13,
-    fontSize: FONT_MD,
-    paddingBottom: 10
+    fontSize: FONT_S,
+    lineHeight: FONT_S * 2
   },
   inputSearch: {
     height: 30,

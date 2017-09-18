@@ -12,7 +12,7 @@ export default function SearchComponent(props) {
   const{ onChange, showError } = props;
   return (
     <View style={styles.inputContainer}>
-        <Text style={styles.inputTitle}>{'enter zip code'.toUpperCase()}</Text>
+        <Text style={styles.inputTitle}>{'enter zip or postcode'.toUpperCase()}</Text>
         <TextInput
           multiline={false}
           maxLength={10}

@@ -11,8 +11,9 @@ export default StyleSheet.create({
   },
   itemWrapper: {
     padding: 5,
-    borderColor: '#fff',
-    borderBottomColor: '#bbb',
+    borderColor: '#bbb',
+    borderTopColor: '#fff',
+    borderLeftColor: '#fff',
     borderWidth: 1
   },
   itemTitle: {
@@ -28,15 +29,16 @@ export default StyleSheet.create({
     color: '#000'
   },
   activeItem: {
-    borderColor: 'blue',
-    borderBottomColor: 'blue'
+    borderColor: '#007AFF',
+    borderTopColor: '#007AFF'
   },
   activeTitle: {
-    color: 'blue'
+    color: '#007AFF'
   },
   noResults: {
     fontSize: FONT_MD,
-    paddingLeft: 5
+    paddingLeft: 5,
+    paddingTop: 5
   }
 });
 
