@@ -28,7 +28,7 @@ export default class MapContainer extends Component {
 
   componentDidMount() {
     this.getCurrentPosition();
-    this.setState({ markers: this.getMarkers() });
+    this.setState({ markers: this.getMarkers() || [] });
   };
 
   componentWillUnmount() {
